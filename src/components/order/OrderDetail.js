@@ -11,8 +11,6 @@ function OrderDetail(props) {
 
   return (
     <div>
-      
-
         <div className="popup-overlay">
           <div className="popup-content">
             <button className="close-button" onClick={() => props.setOpenPopup(false)}>X</button>
@@ -33,8 +31,6 @@ function OrderDetail(props) {
             <div className='popup-table'>
             <table>
               <tbody>
-               
-                
                 <tr>
                   <td><strong>Năm ra mắt:</strong></td>
                   <td>2019</td>
