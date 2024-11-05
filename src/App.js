@@ -10,6 +10,7 @@ import "./styles/global.scss";
 import User from "./pages/user/User";
 import Product from "./pages/product/Product";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import Order  from "./pages/order/Order"
 
 import ProtectedRoute from "./components/route/ProtectedRoute";
 
@@ -62,6 +63,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Products />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <ProtectedRoute>
+                <Order />
               </ProtectedRoute>
             }
           />
