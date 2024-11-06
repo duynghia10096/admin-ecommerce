@@ -15,6 +15,7 @@ const Order = () => {
 
   const dispatch = useDispatch();
   const alert = useAlert();
+  const [selectedOrderId, setSelectedOrderId] = useState(null);
   const [openPopup, setOpenPopup] = useState(false);
   const [open, setOpen] = useState(false);
   const { orderList } = useSelector((state) => state.orderList);
@@ -108,7 +109,8 @@ const Order = () => {
   };
 
   const handleView = (id) => {
-    navigate(`/products/${id}`);
+    setSelectedOrderId(id); // Lưu ID của đơn hàng được chọn
+    setOpenPopup(true); // Mở popup
   };
   
   // Hàm xử lý sự kiện Delete sản phẩm
@@ -154,7 +156,7 @@ const Order = () => {
         className="productListTable"
       />
       {open && <Add slug="product" columns={columns} setOpen={setOpen} />}
-      {openPopup && <OrderDetail setOpenPopup={setOpenPopup} />}
+      {openPopup && <OrderDetail orderId={selectedOrderId} setOpenPopup={setOpenPopup} />}
     </div>
   );
 };

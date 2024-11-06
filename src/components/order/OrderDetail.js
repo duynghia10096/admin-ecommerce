@@ -1,88 +1,114 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './OrderDetail.css'; // Import CSS cho popup
+import { useDispatch, useSelector } from 'react-redux';
+import {getOrderItemDetail, getDetailOrderReducer, getOrderDetail} from "../../actions/OrderAction"
 
 function OrderDetail(props) {
   const [activeTab, setActiveTab] = useState("product");
+  const dispatch = useDispatch();
+
+  const { orderItemList } = useSelector((state) => state.orderItemList);
+  const {order} = useSelector((state) => state.orderDetail)
+  
+  useEffect(() => {
+    if (props.orderId) {
+      dispatch(getOrderItemDetail(props.orderId));
+      dispatch(getOrderDetail(props.orderId));
+    }
+  }, [dispatch, props.orderId]);
 
   const handleTabChange = (tab) => {
     setActiveTab(tab);
   };
  
-
+ 
   return (
     <div>
         <div className="popup-overlay">
           <div className="popup-content">
             <button className="close-button" onClick={() => props.setOpenPopup(false)}>X</button>
-            <h2>Order</h2>
+            <h2>DETAIL INFO</h2>
             <button
             className={`tab-button ${activeTab === "product" ? "active" : ""}`}
             onClick={() => handleTabChange("product")}
           >
-            Product Info
+           Customer
           </button>
           <button
             className={`tab-button ${activeTab === "order" ? "active" : ""}`}
             onClick={() => handleTabChange("order")}
           >
-            Order Detail
+            Order Item 
           </button>
-          {activeTab === "product" && (
-            <div className='popup-table'>
+          {activeTab === "product" && order && (
+            <div className="popup-table">
             <table>
               <tbody>
                 <tr>
-                  <td><strong>Năm ra mắt:</strong></td>
-                  <td>2019</td>
+                  <td><strong>OrderId</strong></td>
+                  <td>{order.id}</td>
+                </tr>
+        
+                <tr>
+                  <td><strong>Total Price:</strong></td>
+                  <td>{order.totalPrice}</td>
                 </tr>
                 <tr>
-                  <td><strong>Thời gian bảo hành:</strong></td>
-                  <td>24 Tháng</td>
+                  <td><strong>Customer</strong></td>
+                  <td>{order.username}</td>
                 </tr>
                 <tr>
-                  <td><strong>Địa điểm bảo hành:</strong></td>
-                  <td>Nguyễn Kim</td>
+                  <td><strong>Phone</strong></td>
+                  <td>{order.phoneNo}</td>
+                </tr>
+                <tr>
+                  <td><strong>Address</strong></td>
+                  <td>{order.address}</td>
+                </tr>
+                <tr>
+                  <td><strong>Shipping Price</strong></td>
+                  <td>{order.shippingPrice}</td>
                 </tr>
               </tbody>
+
             </table>
-            </div>
+          </div>
           
           )}
-          {activeTab === "order" && (
-            <div className='popup-table'>
+          {activeTab === "order" && orderItemList && (
+            <div className="popup-table">
             <table>
+              <thead>
+                <tr>
+                  <th>Quantity</th>
+                  <th>Price</th>
+                  <th>stock</th>
+                  <th>createdDate</th>
+                  <th>Image</th>
+                  <th>Name</th>\
+                </tr>
+              </thead>
               <tbody>
-                <tr>
-                  <td><strong>Model:</strong></td>
-                  <td>A412FA-EK156T</td>
-                </tr>
-                <tr>
-                  <td><strong>Màu sắc:</strong></td>
-                  <td>Xanh</td>
-                </tr>
-                <tr>
-                  <td><strong>Nhà sản xuất:</strong></td>
-                  <td>Asus</td>
-                </tr>
-                <tr>
-                  <td><strong>Xuất xứ:</strong></td>
-                  <td>Trung Quốc</td>
-                </tr>
-                <tr>
-                  <td><strong>Năm ra mắt:</strong></td>
-                  <td>2019</td>
-                </tr>
-                <tr>
-                  <td><strong>Thời gian bảo hành:</strong></td>
-                  <td>24 Tháng</td>
-                </tr>
-                <tr>
-                  <td><strong>Địa điểm bảo hành:</strong></td>
-                  <td>Nguyễn Kim</td>
-                </tr>
+                {orderItemList.map((item, index) => (
+                  <tr key={index}>
+                    <td>{item.quantity}</td>
+                    <td>{item.price}</td>
+                    <td>{item.stock}</td>
+                    <td>{item.createdDate}</td>
+                    <td>
+                            <img
+                              src={item.imageUrl}
+                              alt={`OrderItem ${index + 1}`}
+                              style={{ width: "50px", height: "50px" }}
+                            />
+                          </td>
+                    <td>{item.name}</td>
+                    
+                  </tr>
+                ))}
               </tbody>
             </table>
-            </div>
+          </div>
           
           )}
 </div>

@@ -4,7 +4,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.8); /* Màu nền tối hơn cho overlay */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -39,61 +39,77 @@
 
 .popup-table {
   width: 100%;
-  border-collapse: separate; /* Tách đường viền các ô */
-  border-spacing: 0 10px; /* Khoảng cách giữa các hàng */
+  border-collapse: separate;
+  border-spacing: 0 10px;
 }
 
-.popup-table th, .popup-table td {
-  padding: 15px 10px; /* Thêm khoảng cách trong ô */
-  border: 1px solid #555; /* Làm rõ đường viền với màu sáng hơn */
+.popup-table th,
+.popup-table td {
+  padding: 15px 10px;
+  border: 1px solid #555;
   text-align: left;
-  vertical-align: middle; /* Căn giữa theo chiều dọc */
+  vertical-align: middle;
 }
 
 .popup-table th {
-  background-color: #3c3c4e; /* Nền cho tiêu đề */
+  background-color: #3c3c4e;
   color: #ffffff;
   font-weight: bold;
+  text-align: center;
 }
 
 .popup-table td {
-  background-color: #2c2c3e; /* Nền cho các ô */
+  background-color: #2c2c3e;
   color: #ffffff;
   transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
 .popup-table tr:hover td {
-  background-color: #4c4c5e; /* Nền tối hơn khi hover */
-  transform: translateY(-3px); /* Di chuyển hàng lên nhẹ khi hover */
+  background-color: #4c4c5e;
+  transform: translateY(-3px);
 }
 
 .popup-table tr {
-  border-radius: 8px; /* Bo góc hàng */
+  border-radius: 8px;
 }
 
-.popup-table th:first-child, 
+.popup-table th:first-child,
 .popup-table td:first-child {
-  border-top-left-radius: 8px; /* Bo góc trái của ô đầu tiên */
-  border-bottom-left-radius: 8px; /* Bo góc trái của ô cuối */
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 
-.popup-table th:last-child, 
+.popup-table th:last-child,
 .popup-table td:last-child {
-  border-top-right-radius: 8px; /* Bo góc phải của ô đầu tiên */
-  border-bottom-right-radius: 8px; /* Bo góc phải của ô cuối */
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+.popup-table .image-cell {
+  text-align: center;
+}
+
+.popup-table .image-cell img {
+  max-width: 50px;
+  max-height: 50px;
+  border-radius: 4px;
+  transition: transform 0.3s ease;
+}
+
+.popup-table .image-cell img:hover {
+  transform: scale(1.1);
 }
 
 
 .popup-content {
-  background-color: #2c2c3e; /* Màu nền tối để phù hợp với bảng */
-  color: #ffffff; /* Màu chữ trắng */
+  background-color: #2c2c3e;
+  color: #ffffff;
   padding: 20px;
   border-radius: 8px;
-  max-width: 500px;
+  max-width: 700px;
   width: 100%;
   position: relative;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Thêm bóng */
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Hiệu ứng khi popup xuất hiện */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
 .popup-content:hover {
@@ -113,7 +129,7 @@
 }
 
 .close-button:hover {
-  color: #cccccc; /* Hiệu ứng màu khi hover */
+  color: #cccccc;
 }
 
 .popup-content .popup-row {
